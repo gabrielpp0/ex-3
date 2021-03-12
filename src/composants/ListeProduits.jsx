@@ -3,12 +3,12 @@ import Produit from "./Produit";
 import { useEffect, useState } from 'react';
 /******* Ex#3 - Étape D ********************************/ 
 // Importer l'objet bd du fichier firebase.js
-
+import {insatanceFirestore} from 'firebase.js';
 
 export default function ListeProduits(props) {
   /******* Ex#3 - Étape E ********************************/ 
   // Créer un "état" React pour les produits (utiliser useState)
-  
+  const [tabProduits, setTabProduits] = useState([]);
     
   useEffect(() => {
     async function getProduits() {
@@ -40,7 +40,18 @@ export default function ListeProduits(props) {
           Attention : les composants Produit s'attendent à recevoir l'état du panier dans leurs props, donc vous devez
           avoir l'attribut "etatPanier={props.etatPanier}" quand vous les générer ici : encore une fois, regardez 
           le code de l'exercice de classe.
-        */}
+          
+        */
+        }
+        {tabProduits.map((prd) => (
+          <Produit
+            key={prd.id}
+            etatPanier={props.etatPanier}
+            id={prd.id}
+            nom={prd.nom}
+            prix={prd.prix}
+          />
+        ))}
 
       </ul>
     </div>
