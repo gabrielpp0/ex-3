@@ -20,11 +20,12 @@ export default function ListeProduits(props) {
       // [Suggestion : remarquez que la fonction getProduits() est marquée 'async'. Lorsque vous appelez la méthode Firestore qui retourne les produits, cette fonction 
       // est une Promesse, vous pouvez simplement utiliser la syntax 'await' pour attendre le résultat avant de remplir le tableau tabProduits 
       // (visionnez la capsule au sujet du code asynchrone en JavaScript)]
-
+      const reponse = await insatanceFirestore.collection('ex3-produits').get();
       
+      reponse.forEach(doc => tabProduits.push(doc.data));
       /******* Ex#3 - Étape G ********************************/ 
       // Modifier l'état des produits (initialisé ci-dessus avec useState) en utilisant le mutateur et le tableau tabProduits
-      
+      setTabProduits(tabProduits);
     }
     getProduits();
   }, []); // Ne modifiez surtout pas le tableau des dépendances à gauche : vous risquez un appel récurent sans fin de l'API Firebase !!!!
